@@ -58,29 +58,34 @@ def if_function(condition, true_result, false_result):
 
 
 def with_if_statement():
+    """
+    >>> result = with_if_statement()
+    2
+    >>> print(result)
+    None
+    """
     if c():
         return t()
     else:
         return f()
 
 def with_if_function():
+    """
+    >>> result = with_if_function()
+    1
+    2
+    >>> print(result)
+    None
+    """
     return if_function(c(), t(), f())
 
-num = 0
 
 def c():
     return False
 
 def t():
-    global num
-    num = 1
+    print(1)
 
 def f():
-    return num
-
-# 
-print(with_if_statement())
-
-# All expressions are evaluated before passed to the formal parameter
-print(with_if_function())
+    print(2)
 
