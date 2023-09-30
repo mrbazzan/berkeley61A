@@ -141,16 +141,8 @@ def repeated(f, n):
     8
     >>> repeated(lambda x: 3*x, 5)(1)  # 3 * 3 * 3 * 3 * 3 * 1
     243
-
     """
-
-    def inner(num):
-        count = n
-        while count > 0:
-            num = f(num)
-            count = count - 1
-        return num
-    return inner
+    return accumulate(compose1, identity, n, lambda x: f)
 
 def square(x):
     """Return x squared."""
