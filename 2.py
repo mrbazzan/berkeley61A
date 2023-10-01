@@ -153,3 +153,39 @@ def compose1(f, g):
     def h(x):
         return f(g(x))
     return h
+
+# Q5 (Extra)
+def zero(f):
+    """Church numeral 0."""
+    return lambda x: x
+
+def successor(n):
+    return lambda f: lambda x: f(n(f)(x))
+
+def one(f):
+    """Church numeral 1."""
+    return lambda x: f(x)
+
+def two(f):
+    """Church numeral 2."""
+    return lambda x: f(f(x))
+
+def add_church(m, n):
+    """Return the Church numeral for m + n, for Church numerals m and n."""
+    return lambda f: lambda x: m(f)(x) + n(f)(x)
+
+def church_to_int(n):
+    """Convert the Church numeral n to a Python integer.
+
+    >>> church_to_int(zero)
+    0
+    >>> church_to_int(one)
+    1
+    >>> church_to_int(two)
+    2
+    >>> church_to_int(add_church(two, two))
+    4
+    >>> church_to_int(add_church(successor(successor(successor(zero))), one))
+    4
+    """
+    return n(increment)(0)
