@@ -1,0 +1,63 @@
+
+# definition of 0
+def zero(f):
+    return lambda x: x
+    # def inner(x):
+    #     return x
+    # return inner
+
+# a function that returns 1 more than its argument
+def successor(n):
+    return lambda f: lambda x: f(n(f)(x))
+    # def inner(f):
+    #     def wrap(x):
+    #         return f(n(f)(x))
+    #     return wrap
+    # return inner
+
+def church_to_int(n):
+    """
+    >>> church_to_int(zero)
+    0
+    >>> church_to_int(one)
+    1
+    >>> church_to_int(two)
+    2
+    >>> church_to_int(successor(zero))
+    1
+    >>> church_to_int(successor(successor(successor(zero))))
+    3
+    >>> church_to_int(add_church(one, two))
+    3
+    >>> church_to_int(add_church(successor(successor(successor(zero))), one))
+    4
+    """
+    return n(lambda x: x + 1)(0)
+
+
+def one(f):
+    # print(zero(f)(1))
+    # return lambda x: f(zero(f)(x))
+    return lambda x: f(x)
+    # def wrap(x):
+    #     return f(zero(f)(x))
+    # return wrap
+
+def two(f):
+    # return lambda x: f(one(f)(x))
+    return lambda x: f(f(x))
+    # def wrap(x):
+    #     return f(one(f)(x))
+    # return wrap
+
+# lambda f: lambda x: m(f)(x) + n(f)(x) (increment) (0)
+# lambda x: m(increment)(x) + n(increment)(x) (0)
+# m(increment)(0) + n(increment)(0)
+# one(increment)(0) + one(increment)(0)
+
+def add_church(m, n):
+    # >>> add_church(zero, zero)
+    # >>> add_church(one, one)
+    return lambda f: lambda x: m(f)(x) + n(f)(x)
+
+
