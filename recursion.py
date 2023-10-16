@@ -35,8 +35,6 @@ def num_sevens(n):
     else:
         return num_sevens(n // 10)
 
-from operator import add, sub
-
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
 
@@ -65,14 +63,11 @@ def pingpong(n):
     >>> pingpong(100)
     2
     """
-    op = add
-    count, index = 0, 0
-    while index < n:
-        count = op(count, 1)
 
-        if ((index+1) % 7 == 0) or num_sevens(index+1) > 0:
-            op = sub if op is add else add
-
+    count, index, updater = 0, 1, 1
+    while index <= n:
+        count += updater
+        if ((index % 7) == 0) or num_sevens(index) > 0:
+            updater = -updater
         index += 1
-
     return count
