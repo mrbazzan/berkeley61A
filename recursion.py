@@ -64,10 +64,12 @@ def pingpong(n):
     2
     """
 
-    count, index, updater = 0, 1, 1
-    while index <= n:
-        count += updater
-        if ((index % 7) == 0) or num_sevens(index) > 0:
-            updater = -updater
-        index += 1
-    return count
+    def helper(count, index, updater):
+        if index == n:  # if index > n: return count
+            return count + updater
+        elif (index%7==0) or num_sevens(index)>0:
+            return helper(count+updater, index+1, -updater)
+        else:
+            return helper(count+updater, index+1, updater)
+
+    return helper(0, 1, 1)
