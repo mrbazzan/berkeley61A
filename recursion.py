@@ -74,6 +74,42 @@ def pingpong(n):
 
     return helper(0, 1, 1)
 
+"""1) The number of partitions of a positive integer n is the number of ways in
+which n can be expressed as the sum of positive integers in increasing order.
+For example, the number 5 has 7 partitions:
+
+    5 = 5
+    5 = 1 + 4
+    5 = 2 + 3
+    5 = 1 + 1 + 3
+    5 = 1 + 2 + 2
+    5 = 1 + 1 + 1 + 2
+    5 = 1 + 1 + 1 + 1 + 1
+
+Write a tree-recursive function part(n) that returns the number of partitions
+of n.
+
+Hint: Introduce a locally defined function that computes partitions of n using only
+a subset of the integers less than or equal to n.  Once you have done so, you
+can use very similar logic to the count_change function from lecture.
+"""
+
+def part(n):
+    """Return the number of partitions of positive integer n.
+
+    >>> part(5)
+    7
+    """
+
+    def helper(count, partition):
+        if count < 0:
+            return 0
+        if count == 0 or partition == 1:
+            return 1
+        return helper(count-partition, partition) + helper(count, partition-1)
+
+    return helper(n, n)
+
 def count_change(amount):
     """Return the number of ways to make change for amount.
 
