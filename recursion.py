@@ -73,3 +73,53 @@ def pingpong(n):
             return helper(count+updater, index+1, updater)
 
     return helper(0, 1, 1)
+
+def count_change(amount):
+    """Return the number of ways to make change for amount.
+
+    >>> count_change(7)
+    6
+    >>> count_change(10)
+    14
+    >>> count_change(20)
+    60
+    >>> count_change(100)
+    9828
+    >>> count_change(16)
+    36
+    """
+
+    # for 7
+    #      (7, 7)
+    #  (0, 7)  (7, 6)
+    #       (1, 6) (7, 5)
+    #            (2, 5) (7, 4)
+    #                  (3, 4) (7, 3)
+    #              (-1, 4) (3, 3)      (4, 3)               (7, 2)
+    #                    (0, 3) (3, 2)   x               (5, 2) (7, 1)
+    #                         (1, 2) (3, 1)           (3, 2) (5, 1)
+    #                          (-1, 2) (1, 1)      (1, 2) (3, 1)
+    #                                           (-1, 2) (1, 1)
+    # 1 2 4
+    # 1 1 1 4
+    # 1 2 2 2
+    # 1 1 1 2 2
+    # 1 1 1 1 1 2
+    # 1 1 1 1 1 1 1
+
+    # find the highest power of two in amount
+    def max_power_of_two(amount):
+        def index(number):
+            if number == 1:
+                return 0
+            return 1 + index(number >> 1)
+        return 1 << index(amount)
+
+    def helper(amount, cent):
+        if amount < 0:
+            return 0
+        elif amount == 0 or cent == 1:
+            return 1
+        return helper(amount-cent, cent) + helper(amount, max_power_of_two(cent-1))
+
+    return helper(amount, max_power_of_two(amount))
