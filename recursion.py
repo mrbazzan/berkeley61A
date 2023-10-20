@@ -159,3 +159,57 @@ def count_change(amount):
         return helper(amount-cent, cent) + helper(amount, max_power_of_two(cent-1))
 
     return helper(amount, max_power_of_two(amount))
+
+"""TOWER OF HANOI"""
+
+def print_move(origin, destination):
+    """Print instructions to move a disk."""
+    print("Move the top disk from rod", origin, "to rod", destination)
+
+def move_stack(n, start, end):
+    """Print the moves required to move n disks on the start pole to the end
+    pole without violating the rules of Towers of Hanoi.
+
+    n -- number of disks
+    start -- a pole position, either 1, 2, or 3
+    end -- a pole position, either 1, 2, or 3
+
+    There are exactly three poles, and start and end must be different. Assume
+    that the start pole has at least n disks of increasing size, and the end
+    pole is either empty or has a top disk larger than the top n start disks.
+
+    >>> move_stack(1, 1, 3)
+    Move the top disk from rod 1 to rod 3
+    >>> move_stack(2, 1, 3)
+    Move the top disk from rod 1 to rod 2
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 2 to rod 3
+    >>> move_stack(3, 1, 3)
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 1 to rod 2
+    Move the top disk from rod 3 to rod 2
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 2 to rod 1
+    Move the top disk from rod 2 to rod 3
+    Move the top disk from rod 1 to rod 3
+    """
+    assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
+
+    def get_free_pole(start, end):
+        # basically during movement, move n-1 to the other pole
+        # so if we are moving from 1 to 2, move n-1 to the 3rd pole
+        # or moving from 3 to 2, move n=1 to the 1st pole
+
+        if end == 1:
+            return 3 if start == 2 else 2
+        if end == 2:
+            return 3 if start == 1 else 1
+        if end == 3:
+            return 2 if start == 1 else 1
+
+    if n == 1:
+        print_move(start, end)
+    else:
+        move_stack(n-1, start, get_free_pole(start, end))
+        move_stack(n-n+1, start, end)
+        move_stack(n-1, get_free_pole(start, end), end)
