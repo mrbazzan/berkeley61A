@@ -213,3 +213,40 @@ def move_stack(n, start, end):
         move_stack(n-1, start, get_free_pole(start, end))
         move_stack(n-n+1, start, end)
         move_stack(n-1, get_free_pole(start, end), end)
+
+
+"""3) A perfect number is defined as a positive integer equal to the sum of all
+its factors less than itself. For example, the first perfect number is 6,
+because its factors are 1, 2, 3, and 6, and 1+2+3=6. The second perfect number
+is 28, because 1+2+4+7+14=28.
+
+Write a function next_perfect(n) that tests numbers starting with n and
+continuing with n+1, n+2, etc. until a perfect number is found. You will need
+to implement sum_of_factors as well.
+"""
+
+def sum_of_factors(n):
+    """Return the sum of the factors of n less than n. A factor of a positive
+    integer n is a positive integer that divides n evenly.
+
+    >>> sum_of_factors(21)
+    11
+    >>> sum_of_factors(28)
+    28
+    """
+    total, i = 0, 1
+    while i < n:
+        if (n%(n-i)) == 0:
+            total += (n-i)
+        i = i + 1
+    return total
+
+def next_perfect(n):
+    """Return the smallest perfect number greater than or equal to n.
+
+    >>> next_perfect(7)
+    28
+    """
+    while sum_of_factors(n) != n:
+        n = n + 1
+    return n
