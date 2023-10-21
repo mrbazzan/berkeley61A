@@ -234,12 +234,15 @@ def sum_of_factors(n):
     >>> sum_of_factors(28)
     28
     """
-    total, i = 0, 1
-    while i < n:
-        if (n%(n-i)) == 0:
-            total += (n-i)
-        i = i + 1
-    return total
+    def helper(i):
+        if i == n:
+            return 0
+        elif (n%(n-i)) == 0:
+            return n-i + helper(i+1)
+        else:
+            return helper(i+1)
+    return helper(1)
+
 
 def next_perfect(n):
     """Return the smallest perfect number greater than or equal to n.
@@ -247,6 +250,6 @@ def next_perfect(n):
     >>> next_perfect(7)
     28
     """
-    while sum_of_factors(n) != n:
-        n = n + 1
-    return n
+    if sum_of_factors(n) == n:
+        return n
+    return next_perfect(n+1)
