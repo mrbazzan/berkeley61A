@@ -90,7 +90,7 @@ def div_interval(x, y):
     >>> str_interval(div_interval(make_interval(-1, 2), make_interval(4, 8)))
     '-0.25 to 0.5'
     """
-    assert lower_bound(y) and upper_bound(y)
+    assert lower_bound(y) and upper_bound(y), "Dividing by an interval containing zero"
     reciprocal_y = make_interval(1/upper_bound(y), 1/lower_bound(y))
     return mul_interval(x, reciprocal_y)
 
