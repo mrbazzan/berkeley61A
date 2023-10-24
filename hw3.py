@@ -98,6 +98,17 @@ def div_interval(x, y):
 intervals.  Add a doctest.
 """
 
+def sub_interval(x, y):
+    """Return the interval that contains the difference between any value in x
+    and any value in y.
+
+    >>> str_interval(sub_interval(make_interval(-1, 2), make_interval(4, 8)))
+    '-9 to -2'
+    """
+    # (4, 8) - (2, 3) = ((x1 - y2), (x2 - y1))
+    lower = lower_bound(x) - upper_bound(y)
+    upper = upper_bound(x) - lower_bound(y)
+    return make_interval(lower, upper)
 
 """In passing, Ben also cryptically comments, "By testing the signs of the
 endpoints of the intervals, it is possible to break mul_interval into nine
