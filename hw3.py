@@ -25,7 +25,7 @@ defines the following operations.
 
 def str_interval(x):
     """Return a string representation of interval x.
-    
+
     >>> str_interval(make_interval(-1, 2))
     '-1 to 2'
     """
@@ -112,7 +112,7 @@ def mul_interval_fast(x, y):
     "*** YOUR CODE HERE ***"
     """
     "*** YOUR CODE HERE ***"
- 
+
 
 """After debugging her program, Alyssa shows it to a potential user, who
 complains that her program solves the wrong problem. He wants a program that can
@@ -147,7 +147,7 @@ selector is the same as the one shown above.
 
 def make_center_percent(c, p):
     """Construct an interval from center and percentage tolerance.
-    
+
     >>> str_interval(make_center_percent(2, 50))
     '1.0 to 3.0'
     """
@@ -155,7 +155,7 @@ def make_center_percent(c, p):
 
 def percent(x):
     """Return the percentage tolerance of interval x.
-    
+
     >>> percent(make_interval(1, 3))
     50.0
     """
@@ -203,7 +203,7 @@ is multiple references to the same interval.
 
 The Multiple References Problem: a formula to compute with intervals using
 Alyssa's system will produce tighter error bounds if it can be written in such a
-form that no variable that represents an uncertain number is repeated. 
+form that no variable that represents an uncertain number is repeated.
 
 Thus, she says, par2 is a better program for parallel resistances than par1. Is
 she right? Why? Write an explanation as a string below.
@@ -212,7 +212,7 @@ she right? Why? Write an explanation as a string below.
 "*** YOUR CODE HERE ***"
 
 """Write a function quadratic that returns the interval of all values f(t) such
-that t is in the argument interval x and 
+that t is in the argument interval x and
 
 f(t) = a * t * t + b * t + c
 
@@ -248,7 +248,7 @@ square_interval function below for intervals that do not contain 0.
 
 def non_zero(x):
     """Return whether x contains 0."""
-    return lower_bound(x) > 0 or upper_bound(x) < 0 
+    return lower_bound(x) > 0 or upper_bound(x) < 0
 
 def square_interval(x):
     """Return the interval that contains all squares of values in x, where x
@@ -265,7 +265,7 @@ zero = make_interval(0, 0)
 def sum_nonzero_with_for(seq):
     """Returns an interval that is the sum of the squares of the non-zero
     intervals in seq, using a for statement.
-    
+
     >>> str_interval(sum_nonzero_with_for(seq))
     '0.25 to 2.25'
     """
@@ -275,7 +275,7 @@ from functools import reduce
 def sum_nonzero_with_map_filter_reduce(seq):
     """Returns an interval that is the sum of the squares of the non-zero
     intervals in seq, using using map, filter, and reduce.
-    
+
     >>> str_interval(sum_nonzero_with_map_filter_reduce(seq))
     '0.25 to 2.25'
     """
@@ -284,7 +284,7 @@ def sum_nonzero_with_map_filter_reduce(seq):
 def sum_nonzero_with_generator_reduce(seq):
     """Returns an interval that is the sum of the squares of the non-zero
     intervals in seq, using using reduce and a generator expression.
-    
+
     >>> str_interval(sum_nonzero_with_generator_reduce(seq))
     '0.25 to 2.25'
     """
