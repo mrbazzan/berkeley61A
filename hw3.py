@@ -120,9 +120,72 @@ def mul_interval_fast(x, y):
     """Return the interval that contains the product of any value in x and any
     value in y, using as few multiplications as possible.
 
-    "*** YOUR CODE HERE ***"
+    >>> str_interval(mul_interval_fast(make_interval(-1, 2), make_interval(4, 8)))
+    '-8 to 16'
+    >>> str_interval(mul_interval_fast(make_interval(4, 8), make_interval(-1, 2)))
+    '-8 to 16'
+    >>> str_interval(mul_interval_fast(make_interval(4, 8), make_interval(0, 2)))
+    '0 to 16'
+    >>> str_interval(mul_interval_fast(make_interval(4, 8), make_interval(-3, -1)))
+    '-24 to -4'
+    >>> str_interval(mul_interval_fast(make_interval(-3, -1), make_interval(4, 8)))
+    '-24 to -4'
+    >>> str_interval(mul_interval_fast(make_interval(1, 2), make_interval(4, 5)))
+    '4 to 10'
+    >>> str_interval(mul_interval_fast(make_interval(-7, 2), make_interval(-4, 5)))
+    '-35 to 28'
     """
-    "*** YOUR CODE HERE ***"
+    if lower_bound(x) >= 0 and upper_bound(x) >= 0:
+        # [+ +] [+ +]
+        if lower_bound(y) >= 0 and upper_bound(y) >= 0:
+            lower = lower_bound(x) * lower_bound(y)
+            upper = upper_bound(x) * upper_bound(y)
+
+        # [+ +] [- +]
+        elif lower_bound(y) < 0 and upper_bound(y) >= 0:
+            lower = upper_bound(x) * lower_bound(y)
+            upper = upper_bound(x) * upper_bound(y)
+
+        # [+ +] [- -]
+        elif lower_bound(y) < 0 and upper_bound(y) < 0:
+            lower = upper_bound(x) * lower_bound(y)
+            upper = lower_bound(x) * upper_bound(y)
+
+    elif lower_bound(x) < 0 and upper_bound(x) < 0:
+        # [- -] [+ +]
+        if lower_bound(y) >= 0 and upper_bound(y) >= 0:
+            lower = lower_bound(x) * upper_bound(y)
+            upper = upper_bound(x) * lower_bound(y)
+
+        # [- -] [- +]
+        elif lower_bound(y) < 0 and upper_bound(y) >= 0:
+            lower = lower_bound(x) * upper_bound(y)
+            upper = lower_bound(x) * lower_bound(y)
+
+        # [- -] [- -]
+        elif lower_bound(y) < 0 and upper_bound(y) < 0:
+            lower = upper_bound(x) * upper_bound(y)
+            upper = lower_bound(x) * lower_bound(y)
+
+    elif lower_bound(x) < 0 and upper_bound(x) >= 0:
+        # [- +] [+ +]
+        if lower_bound(y) >= 0 and upper_bound(y) >= 0:
+            lower = lower_bound(x) * upper_bound(y)
+            upper = upper_bound(x) * upper_bound(y)
+
+        # [- +] [- -]
+        elif lower_bound(y) < 0 and upper_bound(y) < 0:
+            lower = upper_bound(x) * lower_bound(y)
+            upper = lower_bound(x) * lower_bound(y)
+
+        # [- +] [- +]
+        elif lower_bound(y) < 0 and upper_bound(y) >= 0:
+            lower = min(lower_bound(x) * upper_bound(y),
+                        upper_bound(x) * lower_bound(y))
+            upper = max(lower_bound(x) * lower_bound(y),
+                        upper_bound(x) * upper_bound(x))
+
+    return make_interval(lower, upper)
 
 
 """After debugging her program, Alyssa shows it to a potential user, who
