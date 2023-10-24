@@ -48,6 +48,10 @@ def mul_interval(x, y):
 
     >>> str_interval(mul_interval(make_interval(-1, 2), make_interval(4, 8)))
     '-8 to 16'
+    >>> str_interval(mul_interval(make_interval(4, 8), make_interval(-1, 2)))
+    '-8 to 16'
+    >>> str_interval(mul_interval(make_interval(-3, -1), make_interval(4, 8)))
+    '-24 to -4'
     """
     p1 = lower_bound(x) * lower_bound(y)
     p2 = lower_bound(x) * upper_bound(y)
