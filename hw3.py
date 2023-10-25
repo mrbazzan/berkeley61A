@@ -229,7 +229,8 @@ def make_center_percent(c, p):
     >>> str_interval(make_center_percent(2, 50))
     '1.0 to 3.0'
     """
-    "*** YOUR CODE HERE ***"
+    return make_center_width(c, (p/100)*c)
+
 
 def percent(x):
     """Return the percentage tolerance of interval x.
