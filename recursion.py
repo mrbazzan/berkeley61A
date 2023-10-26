@@ -253,3 +253,31 @@ def next_perfect(n):
     if sum_of_factors(n) == n:
         return n
     return next_perfect(n+1)
+
+"""
+English word to Pig Latin word converter using Recursion
+
+e.g
+mothers -> smother -> othersmay
+pun -> unpay
+
+Basically, move the initial constant cluster (may be empty) from the
+beginning to the end, and add "ay". 
+"""
+
+
+def pig_latin(w):
+    """
+
+    >>> pig_latin("mothers")
+    'othersmay'
+    >>> pig_latin("pun")
+    'unpay'
+    """
+    if starts_vowel(w):
+        return w + "ay"
+    return pig_latin(w[1:] + w[0])
+
+def starts_vowel(word):
+    return word[0].lower() in "aeiou"
+
