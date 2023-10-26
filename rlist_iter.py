@@ -1,4 +1,8 @@
 
+"""
+Recursive List function definition
+"""
+
 empty_rlist = None
 
 def make_rlist(first, rest):
