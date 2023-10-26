@@ -228,6 +228,10 @@ def make_center_percent(c, p):
 
     >>> str_interval(make_center_percent(2, 50))
     '1.0 to 3.0'
+    >>> str_interval(make_center_percent(3, 50))
+    '1.5 to 4.5'
+    >>> str_interval(make_center_percent(5, 20))
+    '4.0 to 6.0'
     """
     return make_center_width(c, (p/100)*c)
 
