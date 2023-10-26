@@ -241,8 +241,13 @@ def percent(x):
 
     >>> percent(make_interval(1, 3))
     50.0
+    >>> percent(make_interval(1, 11))
+    83.33333333333334
+    >>> percent(make_interval(4, 6))
+    20.0
     """
-    "*** YOUR CODE HERE ***"
+    return 100 * (width(x) / center(x))
+
 
 """After considerable work, Alyssa P. Hacker delivers her finished system.
 Several years later, after she has forgotten all about it, she gets a frenzied
