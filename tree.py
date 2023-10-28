@@ -35,6 +35,14 @@ def count_nodes(tree):
         total = total + count_nodes(branch)
     return total
 
+def collect_leaves(tree):
+    if is_leaf(tree):
+        return tree
+    total = []
+    for branch in branches(tree):
+        total = total + collect_leaves(branch)
+    return total
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
@@ -43,3 +51,4 @@ print(t)
 print(label(t))
 print(branches(t))
 print(count_nodes(t))
+print(collect_leaves(t))
