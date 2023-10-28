@@ -27,9 +27,19 @@ def is_tree(tree):
 def is_leaf(tree):
     return not branches(tree)
 
+def count_nodes(tree):
+    total = 1
+    if is_leaf(tree):
+        return 1
+    for branch in branches(tree):
+        total = total + count_nodes(branch)
+    return total
+
+
 t = tree(3, [tree(1),
              tree(2, [tree(1),
                       tree(1)])])
 print(t)
 print(label(t))
 print(branches(t))
+print(count_nodes(t))
