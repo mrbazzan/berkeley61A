@@ -43,6 +43,10 @@ def collect_leaves(tree):
         total = total + collect_leaves(branch)
     return total
 
+    # list comprehension
+    # total = [collect_leaves(b) for b in branches(tree)]
+    # return sum(total, start=tree if is_leaf(tree) else [])
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
