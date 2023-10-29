@@ -53,3 +53,52 @@ def flatten(lst):
         else:
             flattened += [item]
     return flattened
+
+"""
+Replace Leaf
+"""
+
+from tree import tree, print_tree, is_leaf, label, branches
+
+def copy_tree(t):
+    return t
+
+def replace_leaf(t, old, new):
+    """Returns a new tree where every leaf value equal to old has
+    been replaced with new.
+
+    >>> yggdrasil = tree('odin',
+    ...                  [tree('balder',
+    ...                        [tree('thor'),
+    ...                         tree('freya')]),
+    ...                   tree('frigg',
+    ...                        [tree('thor')]),
+    ...                   tree('thor',
+    ...                        [tree('sif'),
+    ...                         tree('thor')]),
+    ...                   tree('thor')])
+    >>> laerad = copy_tree(yggdrasil) # copy yggdrasil for testing purposes
+    >>> print_tree(replace_leaf(yggdrasil, 'thor', 'freya'))
+     odin
+      balder
+       freya
+       freya
+      frigg
+       freya
+      thor
+       sif
+       freya
+      freya
+    >>> laerad == yggdrasil # Make sure original tree is unmodified
+    True
+    """
+    if is_leaf(t):
+        if label(t) == old:
+            return tree(new)
+        return t
+
+    lst = []
+    for branch in branches(t):
+        lst += [replace_leaf(branch, old, new)]
+
+    return tree(label(t), lst)
