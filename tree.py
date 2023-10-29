@@ -78,10 +78,3 @@ collect_leaves = print_calls('collect_leaves', collect_leaves)
 t = tree(3, [tree(1),
              tree(2, [tree(1),
                       tree(1)])])
-print(t)
-print(label(t))
-print(branches(t))
-print(count_nodes(t))
-print(collect_leaves(t))
-print(str_tree(t, 1))
-print_tree(t)
