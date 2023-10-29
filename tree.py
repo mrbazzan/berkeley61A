@@ -74,6 +74,18 @@ def print_calls(name, fn):
 
 collect_leaves = print_calls('collect_leaves', collect_leaves)
 
+def square_tree(t):
+    if is_leaf(t):
+        return tree(label(t) ** 2)
+
+    # There are other ways to implement this, but
+    # always keep data abstraction in mind.
+    branch = []
+    for b in branches(t):
+        branch += tree(square_tree(b))
+
+    return tree(label(t)**2, branches=branch)
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
