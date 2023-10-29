@@ -62,6 +62,17 @@ def print_tree(tree, indent=0):
     for b in branches(tree):
         print_tree(b, indent+1)
 
+def print_calls(name, fn):
+    def inner(tree):
+        print("function name: ", name)
+        print_tree(tree)
+        input()
+        ret = fn(tree)
+        print("Returned: ", ret)
+        return ret
+    return inner
+
+collect_leaves = print_calls('collect_leaves', collect_leaves)
 
 
 t = tree(3, [tree(1),
