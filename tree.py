@@ -47,6 +47,12 @@ def collect_leaves(tree):
     # total = [collect_leaves(b) for b in branches(tree)]
     # return sum(total, start=tree if is_leaf(tree) else [])
 
+def str_tree(tree, indent=0):
+    t = str(label(tree))
+    for b in branches(tree):
+        t += "\n" + " " * indent + str_tree(b, indent*2)
+    return t
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
@@ -56,3 +62,4 @@ print(label(t))
 print(branches(t))
 print(count_nodes(t))
 print(collect_leaves(t))
+print(str_tree(t, 1))
