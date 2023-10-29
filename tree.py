@@ -86,6 +86,14 @@ def square_tree(t):
 
     return tree(label(t)**2, branches=branch)
 
+def fib_tree(n):
+    if n == 0 or n == 1:
+        return tree(n)
+
+    left = fib_tree(n-2)
+    right = fib_tree(n-1)
+    return tree(label(left) + label(right), [left, right])
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
