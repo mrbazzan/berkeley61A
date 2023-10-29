@@ -53,6 +53,16 @@ def str_tree(tree, indent=0):
         t += "\n" + " " * indent + str_tree(b, indent*2)
     return t
 
+def print_tree(tree, indent=0):
+    if is_leaf(tree):
+        print(" "*indent, label(tree))
+        return
+
+    print(" "*indent, label(tree))
+    for b in branches(tree):
+        print_tree(b, indent+1)
+
+
 
 t = tree(3, [tree(1),
              tree(2, [tree(1),
@@ -63,3 +73,4 @@ print(branches(t))
 print(count_nodes(t))
 print(collect_leaves(t))
 print(str_tree(t, 1))
+print_tree(t)
