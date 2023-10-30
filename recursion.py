@@ -199,13 +199,7 @@ def move_stack(n, start, end):
         # basically during movement, move n-1 to the other pole
         # so if we are moving from 1 to 2, move n-1 to the 3rd pole
         # or moving from 3 to 2, move n=1 to the 1st pole
-
-        if end == 1:
-            return 3 if start == 2 else 2
-        if end == 2:
-            return 3 if start == 1 else 1
-        if end == 3:
-            return 2 if start == 1 else 1
+        return 6 - start - end
 
     if n == 1:
         print_move(start, end)
