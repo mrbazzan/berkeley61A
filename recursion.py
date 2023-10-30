@@ -281,3 +281,51 @@ def pig_latin(w):
 def starts_vowel(word):
     return word[0].lower() in "aeiou"
 
+"""2) A mathematical function g is defined by two cases:
+
+   g(n) = n,                                       if n < 4
+   g(n) = g(n - 1) + 2 * g(n - 2) + 3 * g(n - 3),  if n > 3
+
+Write a recursive function that computes g. Then, write an iterative function
+that computes g.
+"""
+
+def g(n):
+    """Return the value of g, defined above, computed recursively.
+
+    >>> g(1)
+    1
+    >>> g(2)
+    2
+    >>> g(3)
+    3
+    >>> g(4)
+    10
+    >>> g(5)
+    22
+    """
+    if n < 4:
+        return n
+    else:
+        return g(n-1) + 2 * g(n-2) + 3 * g(n-3)
+
+def g_iter(n):
+    """Return the value of g, defined above, computed iteratively.
+    >>> g_iter(1)
+    1
+    >>> g_iter(2)
+    2
+    >>> g_iter(3)
+    3
+    >>> g_iter(4)
+    10
+    >>> g_iter(5)
+    22
+    """
+    lst = []
+    for i in range(1, n+1):
+        if i < 4:
+            lst = lst + [i]
+        else:
+            lst = lst + [lst[i-2] + 2 * lst[i-3] + 3 * lst[i-4]]
+    return lst[n-1]
