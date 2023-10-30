@@ -321,7 +321,26 @@ Thus, she says, par2 is a better program for parallel resistances than par1. Is
 she right? Why? Write an explanation as a string below.
 """
 
-"*** YOUR CODE HERE ***"
+"""
+Solution
+-------
+Yes, Eva is right.
+
+Given that both formulas are algebraically equivalent, they can also be derived
+from each other. par1 is a condensed form of par2
+
+Deriving par1 from par2 involves multiplying through by r1r2
+(i.e (1*r1r2) / ((1/r1)*r1r2 + (1/r2)*r1r2) ). This assumes that (1/r1)*r1r2
+returns 1/r2 (i.e r1/r1 equals one, this is not the case as proved
+previously -- dividing an interval by itself does not return unity), and that
+(1/r2)*r1r2 also returns 1/r1.
+
+This also follows Eva's analysis of reference to the same interval
+(i.e r1/r1 equalling one)
+
+par1 deviates from par2 because it requires divison which will
+accumulate debt (introduce error?).
+"""
 
 """Write a function quadratic that returns the interval of all values f(t) such
 that t is in the argument interval x and
