@@ -322,10 +322,11 @@ def g_iter(n):
     >>> g_iter(5)
     22
     """
-    lst = []
-    for i in range(1, n+1):
-        if i < 4:
-            lst = lst + [i]
-        else:
-            lst = lst + [lst[i-2] + 2 * lst[i-3] + 3 * lst[i-4]]
-    return lst[n-1]
+    if n <= 3:
+        return n
+    else:
+        count, g1, g2, last = 3, 1, 2, 3
+        while count < n:
+            g1, g2, last = g2, last, last + 2*g2 + 3*g1
+            count += 1
+        return last
