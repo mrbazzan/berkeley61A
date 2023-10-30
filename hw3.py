@@ -283,7 +283,31 @@ computing the expressions A/A and A/B. You will get the most insight by using
 intervals whose width is a small percentage of the center value.
 """
 
-"*** YOUR CODE HERE ***"
+def test_one():
+    """
+    >>> a = make_center_percent(4, 0.4)
+    >>> b = make_center_percent(2, 0.2)
+    >>> div_interval(a, a)
+    (0.9920318725099602, 1.0080321285140563)
+    >>> div_interval(a, b)
+    (1.9880239520958083, 2.012024048096192)
+
+    >>> par1(a, b) != par2(a, b)
+    True
+    """
+    pass
+
+"""
+Solution
+--------
+
+The test above shows that dividing an interval by itself does not result
+to unity,it returns a value close to it.
+
+Also, executing par1 and par2 with the same arguments does not result
+to the same value. Hence, Lem's observation is right.
+"""
+
 
 """Eva Lu Ator, another user, has also noticed the different intervals computed
 by different but algebraically equivalent expressions. She says that the problem
