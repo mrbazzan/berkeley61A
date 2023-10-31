@@ -171,8 +171,33 @@ def two(f):
     return lambda x: f(f(x))
 
 def add_church(m, n):
-    """Return the Church numeral for m + n, for Church numerals m and n."""
+    """Return the Church numeral for m + n, for Church numerals m and n.
+
+    >>> church_to_int(add_church(two, successor(two)))
+    5
+    """
     return lambda f: lambda x: m(f)(x) + n(f)(x)
+
+def mul_church(m, n):
+    """return the church numeral for m * n, for church numerals m and n.
+
+    >>> church_to_int(mul_church(two, successor(two)))
+    6
+    >>> four = successor(successor(two))
+    >>> church_to_int(mul_church(successor(two), four))
+    12
+    """
+    return lambda f: lambda x: m(f)(x) * n(f)(x)
+
+def pow_church(m, n):
+    """return the church numeral for m ** n, for church numerals m and n.
+
+    >>> church_to_int(pow_church(two, successor(two)))
+    8
+    >>> church_to_int(pow_church(successor(two), two))
+    9
+    """
+    return lambda f: lambda x: m(f)(x) ** n(f)(x)
 
 def church_to_int(n):
     """Convert the Church numeral n to a Python integer.
