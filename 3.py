@@ -159,3 +159,25 @@ def size(w):
 def is_weight(w):
     """Whether w is a weight."""
     return type(w) == list and len(w) == 2 and w[0] == 'weight'
+
+"""
+Total weight of a mobile
+"""
+
+def total_weight(m):
+    """
+    >>> w1 = weight(3)
+    >>> w2 = weight(2)
+    >>> t = mobile(side(2, w1), side(4, w2))
+    >>> v = mobile(side(5, w2), side(5, w1))
+    >>> total_weight(mobile(side(3, w1), side(4, v)))
+    8
+    >>> total_weight(mobile(side(6, w2), side(4, t)))
+    7
+    >>> total_weight(mobile(side(2, t), side(1, v)))
+    10
+    """
+    if is_weight(m):
+        return size(m)
+
+    return total_weight(end(left(m))) + total_weight(end(right(m)))
