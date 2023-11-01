@@ -181,3 +181,54 @@ def total_weight(m):
         return size(m)
 
     return total_weight(end(left(m))) + total_weight(end(right(m)))
+
+"""
+Balanced
+
+A mobile is balanced if two conditions are met:
+
+i) The torque applied by its left side is equal to that applied by its right side.
+Torque of the left side is the length of the left rod multiplied by the total
+weight hanging from that rod. Likewise for the right.
+
+ii) Each of the mobiles hanging at the end of its sides is balanced.
+"""
+
+def balanced(m):
+    """Return whether m is balanced.
+
+    >>> s = mobile(side(2, weight(3)), side(4, weight(2)))
+    >>> balanced(s)
+    False
+    >>> t = mobile(side(2, weight(3)), side(2, weight(3)))
+    >>> balanced(t)
+    True
+    >>> u = mobile(side(10, weight(2)), side(4, s))
+    >>> balanced(u)
+    False
+    >>> v = mobile(side(5, weight(4)), side(10, weight(2)))
+    >>> balanced(v)
+    True
+    >>> w = mobile(side(3, t), side(2, u))
+    >>> balanced(w)
+    False
+    >>> balanced(mobile(side(1, v), side(1, w)))
+    False
+    >>> balanced(mobile(side(1, w), side(1, v)))
+    False
+    """
+
+    if is_weight(m):
+        return True
+
+    left_side = left(m)
+    right_side = right(m)
+
+    end_left_side = end(left_side)
+    end_right_side = end(right_side)
+
+    left_torque = length(left_side) * total_weight(end_left_side)
+    right_torque = length(right_side) * total_weight(end_right_side)
+
+    return (balanced(end_left_side) == balanced(end_right_side)) \
+            and (left_torque == right_torque)
