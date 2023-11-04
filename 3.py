@@ -232,3 +232,53 @@ def balanced(m):
 
     return (balanced(end_left_side) == balanced(end_right_side)) \
             and (left_torque == right_torque)
+
+"""
+Totals
+"""
+
+def totals_tree(m):
+    """Return a tree representing the mobile with its total weight at the root.
+
+    >>> totals_tree(weight(3))
+    [3]
+    >>> s = mobile(side(2, weight(3)), side(4, weight(2)))
+    >>> totals_tree(s)
+    [5, [3], [2]]
+    >>> u = mobile(side(10, weight(2)), side(4, s))
+    >>> totals_tree(u)
+    [7, [2], [5, [3], [2]]]
+    >>> v = mobile(side(5, weight(4)), side(10, weight(2)))
+    >>> totals_tree(v)
+    [6, [4], [2]]
+    >>> x = mobile(side(1, weight(2)), side(1, weight(1)))
+    >>> print_tree(totals_tree(x))
+     3
+      2
+      1
+    >>> y = mobile(side(2, weight(1)), side(2, s))
+    >>> print_tree(totals_tree(y))
+     6
+      1
+      5
+       3
+       2
+    >>> print_tree(totals_tree(mobile(side(2, x), side(3, y))))
+     9
+      3
+       2
+       1
+      6
+       1
+       5
+        3
+        2
+    """
+    if is_weight(m):
+        return tree(size(m))
+
+    lst = []
+    for side in [end(left(m)), end(right(m))]:
+        lst = lst + [totals_tree(side)]
+
+    return tree(total_weight(m), lst)
