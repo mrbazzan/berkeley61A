@@ -29,4 +29,3 @@ def get_item(rlist, index):
     return first(rlist)
 
 rlist = make_rlist(1, make_rlist(3, make_rlist(5, make_rlist(4, empty_rlist))))
-print(get_item(rlist, 5))
