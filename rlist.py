@@ -81,3 +81,41 @@ def example():
     print(m_list("pop_top"))
 
     m_list("str")
+
+
+"""
+Functional Implementation of a Dictionary
+"""
+
+def make_dict():
+    records = []
+
+    def getitem(key):
+        for k, v in records:
+            if k == key:
+                return v
+    def setitem(key, value):
+        for record in records:
+            if record[0] == key:
+                record[1] = value
+                return
+        records.append([key, value])
+
+    def dispatch(message, key=None, value=None):
+        if message == 'setitem':
+            return setitem(key, value)
+        elif message == 'getitem':
+            return getitem(key)
+        elif message == 'keys':
+            return tuple(k for k, _ in records)
+        elif message == 'values':
+            return tuple(v for _, v in records)
+    return dispatch
+
+def dict_example():
+    d = make_dict()
+    d('setitem', 3, 9)
+    d('setitem', 4, 16)
+    print(d('getitem', 3))
+    print(d('keys'))
+    print(d('values'))
