@@ -43,3 +43,41 @@ def make_withdraw(balance):
     return withdraw
 
 wd = make_withdraw(100)
+
+"""
+Mutable Recursive List
+"""
+
+def make_mutable_rlist():
+    contents = empty_rlist
+    def dispatch(message, value=None):
+        nonlocal contents
+        if message == "len":
+            return get_length(contents)
+        elif message == "get":
+            return get_item(contents, value)
+        elif message == "add_top":
+            contents = make_rlist(value, contents)
+        elif message == "pop_top":
+            top = first(contents)
+            contents = rest(contents)
+            return top
+        elif message == "str":
+            print(contents)
+
+    return dispatch
+
+def example():
+    m_list = make_mutable_rlist()
+    m_list("add_top", 1)
+    m_list("add_top", 3)
+    m_list("add_top", 8)
+
+    m_list("str")
+
+    print(m_list("len"))
+    print(m_list("get", 2))
+
+    print(m_list("pop_top"))
+
+    m_list("str")
